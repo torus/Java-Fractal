@@ -5,7 +5,7 @@ class GraphicsSample
     public static void main(String args[]) {
         GraphicsDraw paper = new GraphicsDraw();
 
-        paper.setSize(640, 640);
+        paper.setSize(640, 480);
         paper.setTitle("Fractal");
         paper.setVisible( true );
     }
@@ -14,16 +14,28 @@ class GraphicsSample
 class GraphicsDraw extends Frame
 {
     public void paint(Graphics g) {
-        drawTree (g, 1, 320, 320, 0);
+        drawTree(g, 1, 100, 240, 0, 1);
     }
 
-    private void drawTree (Graphics g, int n, int x, int y, float angle) {
-        g.setColor(Color.red);
-        g.fillOval(40, 80, 60, 60);
-        g.setColor(Color.blue);
-        g.fillRect(110, 40, 60, 60);
-        g.setColor(Color.black);
-        g.drawLine(0, 20, 100, 130);
-        g.drawLine(200, 20, 10, 130);
+    private void drawTree(Graphics g, int n, int x, int y, double angle, int sign) {
+        if (n > 31) return;
+
+        int r = 200 / n;
+        int c = (n % 15) * 16;
+
+        g.setColor(new Color(255, 255 - c, c));
+        g.fillOval(x - r / 2, y - r / 2, r, r);
+
+        int r2 = (r + 200 / (n + 1)) / 2;
+
+        drawTree(g, n + 1,
+                 x + (int)(Math.cos(angle) * r2), y + (int)(Math.sin(angle) * r2),
+                 angle + Math.PI * 0.1 * sign, sign);
+        if (Math.random() < 0.2) {
+            double a2 = angle - Math.PI * 0.5 * sign;
+            drawTree(g, n + 1,
+                     x + (int)(Math.cos(a2) * r2),
+                     y + (int)(Math.sin(a2) * r2), a2, -sign);
+        }
     }
 }
