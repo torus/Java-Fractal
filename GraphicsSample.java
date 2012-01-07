@@ -15,13 +15,11 @@ class GraphicsSample
 class GraphicsDraw extends Frame
 {
     public void paint(Graphics g) {
-        BufferedImage buf = new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB);
+        BufferedImage buf = new BufferedImage(640, 480, BufferedImage.TYPE_INT_ARGB);
         Graphics bufg = buf.getGraphics();
-        bufg.setColor(Color.white);
-        bufg.fillRect(0, 0, 640, 480);
 
         drawTree(buf, 1, 100, 240, 0, 1);
-        g.drawImage(buf, 0, 0, Color.black, null);
+        g.drawImage(buf, 0, 0, Color.white, null);
     }
 
     private void drawTree(BufferedImage buf, int n, int x, int y, double angle, int sign) {
