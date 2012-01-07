@@ -26,6 +26,14 @@ class GraphicsDraw extends Frame
         return 100 / (int)(Math.sqrt(n));
     }
 
+    private boolean canDraw(BufferedImage buf, int x, int y, int r) {
+        if (x < 0 || y < 0 || x >= 640 || y >= 480)
+            return false;
+
+        boolean res = buf.getRGB(x, y) == 0;
+        return res;
+    }
+
     private void drawTree(BufferedImage buf, int n, int x, int y, double angle, int sign) {
         if (n > 31) return;
 
@@ -34,8 +42,12 @@ class GraphicsDraw extends Frame
 
         Graphics g = buf.getGraphics();
 
-        g.setColor(new Color(255, 255 - c, c));
-        g.fillOval(x - r / 2, y - r / 2, r, r);
+        if (canDraw(buf, x, y, r / 2)) {
+            g.setColor(new Color(255, 255 - c, c));
+            g.fillOval(x - r / 2, y - r / 2, r, r);
+        } else {
+            return;
+        }
 
         int r2 = (r + radius(n + 1)) / 2;
 
@@ -47,9 +59,7 @@ class GraphicsDraw extends Frame
             int x2 = x + (int)(Math.cos(a2) * r2);
             int y2 = y + (int)(Math.sin(a2) * r2);
             if (x2 >= 0 && y2 >= 0 && x2 < 640 && y2 < 480) {
-                if (buf.getRGB(x2, y2) == 0) {
-                    drawTree(buf, n + 1, x2, y2, a2, -sign);
-                }
+                drawTree(buf, n + 1, x2, y2, a2, -sign);
             }
         }
     }
