@@ -23,7 +23,7 @@ class GraphicsDraw extends Frame
     }
 
     private int radius(int n) {
-        return 200 / n;
+        return 100 / (int)(Math.sqrt(n));
     }
 
     private void drawTree(BufferedImage buf, int n, int x, int y, double angle, int sign) {
