@@ -23,7 +23,8 @@ class GraphicsDraw extends Frame
     }
 
     private int radius(int n) {
-        return 100 / (int)(Math.sqrt(n));
+        return 200 / n;
+        // return 100 / (int)(Math.sqrt(n));
     }
 
     private boolean canDraw(BufferedImage buf, int x, int y, int r) {
@@ -54,7 +55,7 @@ class GraphicsDraw extends Frame
         drawTree(buf, n + 1,
                  x + (int)(Math.cos(angle) * r2), y + (int)(Math.sin(angle) * r2),
                  angle + Math.PI * 0.1 * sign, sign);
-        if (Math.random() < 0.6) {
+        if (Math.random() < 0.7) {
             double a2 = angle - Math.PI * 0.5 * sign;
             int x2 = x + (int)(Math.cos(a2) * r2);
             int y2 = y + (int)(Math.sin(a2) * r2);
