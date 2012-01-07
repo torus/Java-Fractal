@@ -42,7 +42,8 @@ class GraphicsDraw extends Frame
             double a2 = angle - Math.PI * 0.5 * sign;
             int x2 = x + (int)(Math.cos(a2) * r2);
             int y2 = y + (int)(Math.sin(a2) * r2);
-            drawTree(buf, n + 1, x2, y2, a2, -sign);
+            if (x2 >= 0 && y2 >= 0 && x2 < 640 && y2 < 480)
+                drawTree(buf, n + 1, x2, y2, a2, -sign);
         }
     }
 }
