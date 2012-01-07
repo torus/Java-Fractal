@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.image.*;
 
 class GraphicsSample
 {
@@ -14,7 +15,10 @@ class GraphicsSample
 class GraphicsDraw extends Frame
 {
     public void paint(Graphics g) {
-        drawTree(g, 1, 100, 240, 0, 1);
+        BufferedImage buf = new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB);
+        Graphics bufg = buf.createGraphics();
+        drawTree(bufg, 1, 100, 240, 0, 1);
+        g.drawImage(buf, 0, 0, Color.white, null);
     }
 
     private void drawTree(Graphics g, int n, int x, int y, double angle, int sign) {
