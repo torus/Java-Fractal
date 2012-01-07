@@ -16,9 +16,12 @@ class GraphicsDraw extends Frame
 {
     public void paint(Graphics g) {
         BufferedImage buf = new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB);
-        Graphics bufg = buf.createGraphics();
+        Graphics bufg = buf.getGraphics();
+        bufg.setColor(Color.white);
+        bufg.fillRect(0, 0, 640, 480);
+
         drawTree(bufg, 1, 100, 240, 0, 1);
-        g.drawImage(buf, 0, 0, Color.white, null);
+        g.drawImage(buf, 0, 0, Color.black, null);
     }
 
     private void drawTree(Graphics g, int n, int x, int y, double angle, int sign) {
