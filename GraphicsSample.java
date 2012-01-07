@@ -40,9 +40,9 @@ class GraphicsDraw extends Frame
                  angle + Math.PI * 0.1 * sign, sign);
         if (Math.random() < 0.2) {
             double a2 = angle - Math.PI * 0.5 * sign;
-            drawTree(buf, n + 1,
-                     x + (int)(Math.cos(a2) * r2),
-                     y + (int)(Math.sin(a2) * r2), a2, -sign);
+            int x2 = x + (int)(Math.cos(a2) * r2);
+            int y2 = y + (int)(Math.sin(a2) * r2);
+            drawTree(buf, n + 1, x2, y2, a2, -sign);
         }
     }
 }
