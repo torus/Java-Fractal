@@ -20,27 +20,29 @@ class GraphicsDraw extends Frame
         bufg.setColor(Color.white);
         bufg.fillRect(0, 0, 640, 480);
 
-        drawTree(bufg, 1, 100, 240, 0, 1);
+        drawTree(buf, 1, 100, 240, 0, 1);
         g.drawImage(buf, 0, 0, Color.black, null);
     }
 
-    private void drawTree(Graphics g, int n, int x, int y, double angle, int sign) {
+    private void drawTree(BufferedImage buf, int n, int x, int y, double angle, int sign) {
         if (n > 31) return;
 
         int r = 200 / n;
         int c = (n % 15) * 16;
+
+        Graphics g = buf.getGraphics();
 
         g.setColor(new Color(255, 255 - c, c));
         g.fillOval(x - r / 2, y - r / 2, r, r);
 
         int r2 = (r + 200 / (n + 1)) / 2;
 
-        drawTree(g, n + 1,
+        drawTree(buf, n + 1,
                  x + (int)(Math.cos(angle) * r2), y + (int)(Math.sin(angle) * r2),
                  angle + Math.PI * 0.1 * sign, sign);
         if (Math.random() < 0.2) {
             double a2 = angle - Math.PI * 0.5 * sign;
-            drawTree(g, n + 1,
+            drawTree(buf, n + 1,
                      x + (int)(Math.cos(a2) * r2),
                      y + (int)(Math.sin(a2) * r2), a2, -sign);
         }
